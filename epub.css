@@ -7,6 +7,6 @@ p, h1, h2 {
 
 code {
   color: #333;
-  font-family: 'Courier Mew', Courier;
-  font-size: 120%;
+  font-family: 'Liberation Mono', 'Courier Mew', Courier;
+  font-size: 100%;
 }
