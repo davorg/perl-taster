@@ -140,8 +140,9 @@ Try the following lines:
 
     print "This includes a\ttab";
     print "This\nhas\nlots\nof\nnewlines\n";
-    print "\x{50}\x{65}\x{72}\x{6c}\x{20}\x{52}",
-          "\x{6f}\x{63}\x{6b}\x{73}\x{21}";
+    print "\x{50}\x{65}\x{72}\x{6c}",
+          "\x{20}\x{52}\x{6f}\x{63}",
+	  "\x{6b}\x{73}\x{21}";
 
 Notice that, in order to stop our line of code getting too long, we
 split the string in the last example in two. The `print` function is
@@ -266,7 +267,8 @@ that structured. Perl is quite happy for us to mix different type of
 data in the same array. They are all just scalar data values. So you can
 write something like this:
 
-    my @data = ("\x{3a}", 7, 'A random string',
+    my @data = ("\x{3a}", 7,
+                'A random string',
                 2.718);
     say $data[0];
 
@@ -350,7 +352,8 @@ list containing an even number of element (a key and value for each
 element in the hash) and you will get a warning from Perl if there are
 an odd number of items in your list.
 
-    my %french = ('one', 'un', 'two', 'deux',
+    my %french = ('one', 'un',
+                  'two', 'deux',
                   'three', 'trois');
     say $french{'two'}; # prints "deux";
 
@@ -367,7 +370,8 @@ see where one key/value pair ends and the next one starts. For this
 reason, Perl also has an alternative syntax using a "fat comma"
 operator. It looks like this:
 
-    my %french = (one => 'un', two => 'deux',
+    my %french = (one => 'un',
+                  two => 'deux',
                   three => 'trois');
     say $french{two}; # prints "deux";
 
@@ -404,7 +408,7 @@ the value associated with the deleted key returned to you.
 
     say exists $french{three}; # prints 1
     my $three = delete $french{three};
-    say exists $french{three}; # prints an empty string
+    say exists $french{three}; # an empty string
 
 #Getting Help
 
@@ -535,7 +539,8 @@ newline character in the print statement.
 But what if we didn't want that newline? Perhaps we want our print
 statement to look like this.
 
-    print "Hello, $name. Pleased to meet you.\n";
+    print "Hello, $name. ",
+          "Pleased to meet you.\n";
 
 As it stands, this will print the output over two lines. `$name` still
 has a newline in it, so the full stop and the "Pleased to meet you" will
@@ -546,7 +551,8 @@ newline from the end of a string. so our code will look like this:
     print "What is your name? ";
     my $name = <STDIN>;
     chomp $name;
-    print "Hello, $name. Pleased to meet you.\n";
+    print "Hello, $name. ",
+          "Pleased to meet you.\n";
 
 The last standard file handle is `STDERR`. This is where you should send
 any errors and warnings. At the level we are covering in this tutorial,
@@ -558,7 +564,8 @@ optional first argument which is the filehandle to print to. It's a
 slightly strange first argument as there is no comma following it. So
 you could write something like this:
 
-    print STDERR "Something went wrong\n"; # Note: No comma
+    # Note: No comma
+    print STDERR "Something went wrong\n";
 
 But Perl has a shortcut function called `warn` that you can use instead.
 
@@ -584,7 +591,8 @@ addition, subtraction, multiplication and division.
 It also has operators for less common operators. For example `**` is
 the exponentiation operator ("raising to the power of").
 
-    my $power = 9 ** 5; # 59,049 (9 x 9 x 9 x 9 x 9)
+    my $power = 9 ** 5; # 59,049
+                        # (9 x 9 x 9 x 9 x 9)
 
 And `%` is the modulus operator. This carries out an integer division
 and returns the remainder.
@@ -594,9 +602,9 @@ and returns the remainder.
 All of these operators are also available in a shortcut assignment
 versions.
 
-    $sum     += $value; # Same as $sum = $sum + $value
-    $product *= $value; # Same as
-                        # $product = $product * $value
+    $sum     += $value; # $sum = $sum + $value
+    $product *= $value; # $product =
+                        # $product * $value
 
 There is another, even simpler, version of the shortcut addition and
 subtraction operators if you are adding or subtracting 1. You can use
@@ -723,7 +731,8 @@ this:
 
     my $lives_left = 3;
     while ($lives_left) {
-      # Do something that sets $died to a true or false value
+      # Do something that sets $died
+      # to a true or false value
       if ($died) {
         if ($lives_left) {
           say "Have another try.";
@@ -791,8 +800,11 @@ you treat them as strings, then they are different - they have different
 lengths, for example. Perl can't know which type of comparison, so you
 need to tell it.
 
-    if ($one_value == $another_value) # Compare as numbers
-    if ($one_value eq $another_value) # Compare as strings
+    # Compare as numbers
+    if ($one_value == $another_value)
+    
+    # Compare as strings
+    if ($one_value eq $another_value)
 
 All of the numeric comparisons we saw above have string equivalents. The
 complete list is `eq` (equal), `ne` (not equal), `lt` (less than), `gt`
@@ -822,7 +834,8 @@ only needed to turn the heating on if it was the weekend (because we're
 out of the house during the week). To code would look like this:
 
     if (($current_temp > $too_cold)
-      and (($day eq 'Sat') or ($day eq 'Sun'))) {
+      and (($day eq 'Sat')
+        or ($day eq 'Sun'))) {
       # turn on heating
     }
 
@@ -838,7 +851,8 @@ rewrite these expressions so they work without the parentheses, but it
 doesn't hurt to be over-cautious. Let's simplify the expressions so we
 can see how they are combined.
 
-    (temperature_check) and ((saturday_check) or (sunday_check))
+    (temperature_check) and
+      ((saturday_check) or (sunday_check))
 
 And that simplifies even more to
 
@@ -885,7 +899,8 @@ will drop the minus sign before returning the value to you. This is
 useful, for example, if you want to find the difference between two
 values and you don't know which is the largest.
 
-    my $difference = abs $value - $another_value;
+    my $difference = abs $value -
+                         $another_value;
 
 It is often useful to generate a random number and Perl has the `rand`
 function for this. With no arguments, it returns a random floating point
@@ -926,30 +941,31 @@ is probably `length` which gives you the length of the string.
 You change the case a string with `uc` (convert to upper case) and `lc`
 (convert to lower case).
 
-    say ul 'This is a string'; # 'THIS IS A STRING'
-    say lc 'This is a string'; # 'this is a string'
+    say ul 'This is a string'; # THIS IS A STRING
+    say lc 'This is a string'; # this is a string
 
 You can extract sections of a string using `substr`. You pass this
 function a string, a place to start and the length of the substring that
 you want. Note that the start of the string is position 0 (this is
 similar to arrays).
 
-    say substr 'This is a string', # 'his'
+    say substr 'This is a string', # his
                1, 3;
-    say substr 'This is a string', # 'string'
+    say substr 'This is a string', # string
                6, 10;
 
 You can omit the third argument, in which case, the substring goes to
 the end of the original string.
 
-    say substr 'This is a string', 10; # 'string;
+    say substr 'This is a string', 10; # string
 
 Two particularly functions are `split` (which turns strings into lists
 of values) and `join` (which does the reverse). Imagine that you have a
 date in YYYY-MM-DD format and you want to split it into its constituent
 parts.
 
-    my ($year, $month, $day) = split /-/, '2015-08-01';
+    my ($year, $month, $day)
+      = split /-/, '2015-08-01';
 
 The first argument to `split` defines the characters that you want to
 split on. It is actually a regular expression. Later on, we will see
@@ -959,13 +975,16 @@ Sometimes you won't know how many data items there are in the string
 that you are splitting. In that case you could store the resulting list
 in an array
 
-    my @values = split /\t/, $tab_separated_data;
+    my @values = split /\t/,
+      $tab_separated_data;
 
 Where `split` takes a string and converts it into a list of values,
 `join` does the opposite.
 
-    my $date = join '-', $year, $month, $day;
-    my $tab_separated_data = join "\t", @values;
+    my $date = join '-',
+      $year, $month, $day;
+    my $tab_separated_data
+      = join "\t", @values;
 
 ##Array Functions
 
@@ -991,7 +1010,7 @@ but work on the start of the array rather than the end.
     unshift @words, 'add', 'words', 'to';
     say "@words";
     my $word = shift @words; # "add"
-    say "@words";            # "add" is now missing
+    say "@words";            # "add" is missing
 
 ##File Functions
 
@@ -1072,7 +1091,8 @@ write mode. This is done using the same `open` command, but we reverse
 the direction of the second operator to indicate that we are writing
 rather than reading.
 
-    open my $file_handle, '>', # '>', not '<'
+    # '>', not '<'
+    open my $file_handle, '>',
       'name_of_your_file'
       or die "Could not open file: $!";
 
@@ -1091,7 +1111,8 @@ to add new data to the end of a file. If you open a file handle using
 `>>` instead of `>` then any data will be appended to the end
 of the file rather than overwriting it.
 
-    open my $file_handle, '>>', # '>>', not '>'
+    # '>>', not '>'
+    open my $file_handle, '>>',
       'name_of_your_file'
       or die "Could not open file: $!";
     print $file_handle $some_data;
@@ -1397,7 +1418,8 @@ This book was written in Markdown which was then converted to EPUB
 format using Pandoc. For Amazon, the EPUB was then converted to MOBI
 using KindleGen.
 
-The source to the book is available on Github.
+The source to the book is available on Github. See
+[https://github.com/davorg/perl-taster](https://github.com/davorg/perl-taster).
 
 ##About Perl School
 
