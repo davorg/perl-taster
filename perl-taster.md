@@ -18,7 +18,7 @@ Perl is a general purpose programming language. It became really popular
 for web programming in the 1990s, but it can be just as useful for many
 other general programming tasks. Perl borrows heavily from a number of
 other programming languages and it has also been heavily influenced by
-Unix/Linux utilities like awk and sed.
+Unix/Linux utilities like `awk` and `sed`.
 
 If you want to impress people in the Perl community then you should
 never refer to the language as “PERL”. Perl is not an acronym (although
@@ -53,7 +53,7 @@ find a proper programmers editor will be very useful. Many Perl
 programmers use something like vi or Emacs. These editors both have
 quite steep learning curves, so you might feel more comfortable starting
 with something like Atom, which you can download from
-[https:///tom.io](https://atom.io/).
+[https://atom.io](https://atom.io/).
 
 #Your First Perl Program
 
@@ -196,7 +196,7 @@ code.
 
 This code also has an example of a variable being expanded in a
 double-quoted string. When the `say` statement is executed, Perl looks
-at the current value of $name and substitutes that value in the string
+at the current value of `$name` and substitutes that value in the string
 that is passed to `say`. So this displays “Hello John”. If you change it
 to a single-quoted string, you will see that the variable is no longer
 expanded and “Hello $name” is displayed.
@@ -311,7 +311,7 @@ assign an array to a scalar variable, you get the number of elements.
     my $number_of_elements = @data;
 
 If this is the `@data` array from our previous example, then
-`$number_of_elements will contain 4. This gives us a nice way to add
+`$number_of_elements` will contain 4. This gives us a nice way to add
 an element to our array. If the number of elements in an array is always
 one more than the last index in that array, then accessing the element
 at that position, will give us an element that is outside of the
