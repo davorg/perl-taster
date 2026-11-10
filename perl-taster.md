@@ -1,11 +1,13 @@
 ---
 title: Perl Taster
+subtitle: Your First Two Hours with Perl
 author: Dave Cross
-language: en-UK
+language: en-GB
 cover-image: cover.jpg
 ...
 
-#Introduction
+Introduction
+============
 
 Welcome to Perl. This book is a basic introduction to programming in
 Perl. It is intended as a taster that will show you just enough Perl
@@ -27,16 +29,17 @@ and “Pathologically Eclectic Rubbish Lister” are often retro-fitted to
 the name). The language is "Perl" and the program that you use to run
 your Perl code is called "perl".
 
-#Getting Started
+Getting Started
+===============
 
-To write and run Perl programs, you need two things - a Perl compiler
+To write and run Perl programs, you need two things—a Perl compiler
 and an editor. If you’re using a Mac or a machine running Linux, then
 Perl will already be installed on your system.
 
-However. if you’re using Windows then you’ll need to install Perl. There
+However, if you’re using Windows then you’ll need to install Perl. There
 are a few versions of Perl available for Windows. The one that most
 people seem to recommend is Strawberry Perl which you can get from
-[http://strawberryperl.com/](http://strawberryperl.com/). It is
+[https://strawberryperl.com/](https://strawberryperl.com/). It is
 distributed as a standard Windows software installation file (an .msi
 file) so you will be able to install it easily.
 
@@ -44,7 +47,7 @@ Once you have Perl installed, it is simple to check that it is working
 correctly. Just bring up a terminal window (in Windows that’s CMD.EXE)
 and run `perl -v` to see which version of Perl is installed. Hopefully
 it will be something pretty recent (say, 5.14 or newer) but don’t worry
-if it’s older than that - all of the code we’ll be writing this tutorial
+if it’s older than that—all of the code we’ll be writing this tutorial
 will run on versions as old as 5.10.
 
 You will also need an editor to write your Perl programs. Any basic text
@@ -55,7 +58,8 @@ quite steep learning curves, so you might feel more comfortable starting
 with something like Atom, which you can download from
 [https://atom.io](https://atom.io/).
 
-#Your First Perl Program
+Your First Perl Program
+=======================
 
 It’s traditional that your first program in any language should print
 the words “Hello world”. So that’s what we will do. Open your editor and
@@ -70,8 +74,8 @@ the directory where you saved the program. Find the directory where the
 hello.pl file is and try running the command from there.
 
 There’s not much to explain here. We have a single line of code and it
-calls a built-in Perl function called `print`. You can probably guess
-what print does - it takes a string and displays that string on the
+calls a built-in Perl function called [`print()`](https://perldoc.perl.org/functions/print). You can probably guess
+what print does—it takes a string and displays that string on the
 screen. In this case, we pass it the string “Hello world\n” and that is
 what we see on our screen. If you have used pretty much any other modern
 programming language you will recognise the final two characters in that
@@ -80,7 +84,7 @@ recognised as meaning a newline character. Try removing it from your
 string and see what difference it makes when you run the program.
 
 In many other languages you would need to put parentheses around the
-string that you pass to Perl - `print("Hello world\n")` - this also
+string that you pass to Perl—`print("Hello world\n")`—this also
 works, but Perl programmers tend to omit non-essential punctuation.
 
 There is another way to write the same program. In fact there are many
@@ -96,18 +100,19 @@ same as the previous version (if you have an earlier version you will
 get a syntax error and you should really think about updating your
 version of Perl).
 
-The new function `say` was added in Perl 5.10. It is a short-cut version
-of `print` which always adds the newline to the string that it prints.
+The new function [`say()`](https://perldoc.perl.org/functions/say) was added in Perl 5.10. It is a short-cut version
+of `print()` which always adds the newline to the string that it prints.
 It is a feature that needs to be turned on explicitly, which is why we
 have the `use feature` line before it. You will often see `use`
 statements in a Perl program (the same keyword is used to load external
 libraries) and it is traditional to put them all near the top of the
 file.
 
-#Strings
+Strings
+=======
 
-You will have noticed that when I used `print`, I passed it a string in
-double quotes, but when I used `say` I used a string in single quotes.
+You will have noticed that when I used [`print()`](https://perldoc.perl.org/functions/print), I passed it a string in
+double quotes, but when I used [`say()`](https://perldoc.perl.org/functions/say) I used a string in single quotes.
 And you may be wondering if there is a difference between the two. Perl
 treats strings similarly to many other languages. Single-quoted strings
 are very basic. Almost every character in a single-quoted string
@@ -142,18 +147,19 @@ Try the following lines:
     print "This\nhas\nlots\nof\nnewlines\n";
     print "\x{50}\x{65}\x{72}\x{6c}",
           "\x{20}\x{52}\x{6f}\x{63}",
-	  "\x{6b}\x{73}\x{21}";
+      "\x{6b}\x{73}\x{21}";
 
 Notice that, in order to stop our line of code getting too long, we
-split the string in the last example in two. The `print` function is
-happy to print as many strings as you pass it - they just need to be
+split the string in the last example in two. The `print()` function is
+happy to print as many strings as you pass it—they just need to be
 separated by commas.
 
-Double-quoted strings have one more trick up their sleeves - they
+Double-quoted strings have one more trick up their sleeves—they
 automatically expand variables. But in order to demonstrate that, we
 first need to understand variables.
 
-#Variables
+Variables
+=========
 
 Variables are named locations in memory where we can store values that
 we want to refer to later. Many programming languages force you to declare
@@ -165,7 +171,8 @@ Perl has three main type of variables. Scalars store a single item of
 data. Arrays store an ordered list of data items. Hashes store look-up
 tables.
 
-##Scalars
+Scalars
+-------
 
 Try the following code:
 
@@ -175,7 +182,7 @@ Try the following code:
 
 Here we see our first scalar variable. A scalar variable can store a
 single piece of data. Our variable is called `$name` and it stores
-someone’s name. We define a variable with the keyword “my” and you can
+someone’s name. We define a variable with the keyword `my` and you can
 tell that `$name` is a scalar because its name starts with a `$`
 character. Whenever you see a `$` in a variable name, you know it
 refers to a scalar value.
@@ -191,13 +198,13 @@ as valid to write this:
     say "Hello $name";
 
 From now on, I'll omit the `use feature` line. If you see example code
-that uses `say`, please assume the `use feature` line is part of the
+that uses [`say()`](https://perldoc.perl.org/functions/say), please assume the `use feature` line is part of the
 code.
 
 This code also has an example of a variable being expanded in a
-double-quoted string. When the `say` statement is executed, Perl looks
+double-quoted string. When the `say()` statement is executed, Perl looks
 at the current value of `$name` and substitutes that value in the string
-that is passed to `say`. So this displays “Hello John”. If you change it
+that is passed to `say()`. So this displays “Hello John”. If you change it
 to a single-quoted string, you will see that the variable is no longer
 expanded and “Hello $name” is displayed.
 
@@ -224,18 +231,19 @@ and Ruby) you can happily store any kind of data in any scalar variable.
 
 If you declare a variable and don't give it a value, Perl knows that its
 value is undefined. This is marked with the special scalar value
-"undef". You can return a variable to an undefined state by assigning
-"undef" to it directly
+`undef`. You can return a variable to an undefined state by assigning
+`undef` to it directly:
 
     $variable = undef;
 
-Or by using "undef" as a function.
+Or by using `undef()` as a function.
 
     undef $variable;
 
 Note that this special value is unquoted. It is not the string "undef".
 
-##Arrays
+Arrays
+------
 
 I said that you could store any kind of data in a scalar. It’s more
 accurate to say that you can store any single item of data in a scalar.
@@ -244,7 +252,7 @@ an array. An array stores an ordered list of scalar values. Try this
 code:
 
     my @numbers = (1, 2, 3, 5, 8, 13);
-    say $numbers\[0];
+    say $numbers[0];
     say $numbers[2];
     my @names = ('John', 'Paul',
                  'George', 'Ringo');
@@ -281,7 +289,7 @@ example, we could run:
 And Perl would print 2.718.
 
 You can also print all of the elements from an array at the same time by
-passing the array as a whole to `print` or `say`.
+passing the array as a whole to [`print()`](https://perldoc.perl.org/functions/print) or `say()`.
 
     say @data;
 
@@ -300,7 +308,7 @@ as easily be written:
     say $data[$#data];
 
 Note that because array indexes start from 0, the `$#array` variable
-does not give the number of elements the array - its value is one less
+does not give the number of elements the array—its value is one less
 than the number of elements. For example in an array with only one
 element, the last (and only) index is 0. So the number of elements in an
 array is always given by `$#array + 1`.
@@ -330,14 +338,15 @@ will grow the array accordingly. So if we ran:
 We will suddenly have an array that contains a million elements. All of
 the elements that we haven't explicitly given values to (that's all of
 them except the first five and the last one) will contain the value
-"undef".
+`undef`.
 
 You can also shrink an array easily. You can write to the `$#array`
 variable and it will change the size of the array directly. Any
 values that previously existed at indexes beyond the new final index
 of the array will vanish.
 
-##Hashes
+Hashes
+------
 
 The final variable type that we will cover is the hash. Hashes are a bit
 like arrays in as much as they store a scalar value against a key so that
@@ -361,8 +370,7 @@ Looking up data in a hash looks a lot like looking up data in an array.
 You just use a different type of brackets (curly braces instead of
 square brackets) and the key is a string rather than an integer. The
 symbol in front of the hash name changes from a `%` to a `$` for
-exactly the same reason that a similar change takes place with arrays -
-because a what you get back from the hash lookup expression is a single
+exactly the same reason that a similar change takes place with arrays—because a what you get back from the hash lookup expression is a single
 scalar value.
 
 This syntax for initialising a hash works, but it can be difficult to
@@ -394,7 +402,7 @@ new key and associate your value with it. If the key already exists,
 then Perl will overwrite the existing value with your new one. You can
 only ever have one scalar value associated with any given key.
 
-There is an `exists` function which can tell you if a given key exists
+There is an [`exists()`](https://perldoc.perl.org/functions/exists) function which can tell you if a given key exists
 in your hash.
 
     say exists $french{five};
@@ -403,28 +411,30 @@ This will print either 1 (if the key exists) or an empty string (if it
 doesn't). We will cover this in more detail when we look at logic in
 Perl.
 
-You can delete keys from a hash with the `delete` function. You will get
+You can delete keys from a hash with the [`delete()`](https://perldoc.perl.org/functions/delete) function. You will get
 the value associated with the deleted key returned to you.
 
     say exists $french{three}; # prints 1
     my $three = delete $french{three};
     say exists $french{three}; # an empty string
 
-#Getting Help
+Getting Help
+============
 
 There is plenty of help available when you are writing Perl code and you
 should take advantage of it as much as possible.
 
-##Documentation
+Documentation
+-------------
 
 Perl comes with an incredible amount of detailed documentation which you
 can access from your command line using the `perldoc` command. For
 example `perldoc perlintro` gives a brief introduction to Perl and
 `perldoc perltoc` shows you a table of contents for all of the available
 documentation. You can also access this documentation online at
-[*http://perldoc.perl.org/*](http://perldoc.perl.org/).
+[https://perldoc.perl.org/](https://perldoc.perl.org/).
 
-In particular, I would recommend reading `perldoc perfaq` and all of the
+In particular, I would recommend reading `perldoc perlfaq` and all of the
 other FAQ documents that it points to. They contain a treasury of
 information that will undoubtedly make your Perl programming easier.
 
@@ -432,9 +442,10 @@ All of Perl's built-in functions are documented in `perldoc perlfunc`.
 But if you know the name of a function and you want to quickly get the
 documentation for that function, you can use the `-f` flag to `perldoc`.
 For example, `perldoc -f print` will tell you everything that you need
-to know about `print`.
+to know about [`print()`](https://perldoc.perl.org/functions/print).
 
-##Safety Nets
+Safety Nets
+-----------
 
 If you look at any program written by an experienced Perl programmer,
 you will almost certainly see two lines somewhere near the top of the
@@ -450,7 +461,7 @@ warnings and making the suggested fixes will almost certainly fix
 potential bugs in your code. I highly recommend that you get into the
 habit of adding them to every Perl program that you write.
 
-The most important thing that "use strict" does is to force you to
+The most important thing that `use strict` does is to force you to
 declare your variables. This is a good idea for several reasons, the
 most obvious of which is that it stops you from making typos in your
 variable names. If Perl knows that you have declared all of your
@@ -463,7 +474,7 @@ errors, so Perl shows you the error and then kills the program.
 
 When `use warnings` is added to your code, Perl goes on the lookout for
 a large number of unusual coding practices. Are you printing a variable
-that contains "undef"? Perl will warn you. Have you initialised a hash
+that contains `undef`? Perl will warn you. Have you initialised a hash
 from a list with an odd number of elements? Perl will warn you. In all
 of these cases, Perl won't kill the program, it will display a warning
 to you and the program will continue. But you would be well-advised to
@@ -478,7 +489,8 @@ production.
 All in all there are no good reasons not to use these safety nets.
 That's why most experienced Perl programmers use them all the time.
 
-#Input and Output
+Input and Output
+================
 
 Any programs get more interesting when you can get data into and out of
 them. You before moving on to look at more operators and functions,
@@ -493,28 +505,29 @@ It is a writable file handle like `STDOUT` and it should be the place
 where you write warnings and errors. By default, like `STDOUT`, it is
 connected to the monitor.
 
-##Output
+Output
+------
 
-We have already seen the simplest way to display output to the user -
-it's the `print` function.
+We have already seen the simplest way to display output to the user—it's the [`print()`](https://perldoc.perl.org/functions/print) function.
 
-You can pass one or more strings to `print` and they will be displayed
+You can pass one or more strings to `print()` and they will be displayed
 on the user's monitor.
 
     print "Here is a string\n";
     print "Here are", "two strings\n";
 
-If you want to pass more than one string to `print`, then you separate
+If you want to pass more than one string to `print()`, then you separate
 them using commas.
 
-We have also seen the `say` function which works very similarly to
-`print`, except it automatically appends a newline character to the end
+We have also seen the [`say()`](https://perldoc.perl.org/functions/say) function which works very similarly to
+`print()`, except it automatically appends a newline character to the end
 of the final sting that it prints.
 
     say "Here is a string";
     say "Here are", "two strings";
 
-##Input
+Input
+-----
 
 Input is read from `STDIN`. You read from a filehandle using the file
 input operator, `< … >`. The file input operator reads from the
@@ -545,7 +558,7 @@ statement to look like this.
 As it stands, this will print the output over two lines. `$name` still
 has a newline in it, so the full stop and the "Pleased to meet you" will
 be pushed onto the following line. Perl, of course, has a simple
-solution to this problem. You can use the `chomp` function to remove a
+solution to this problem. You can use the [`chomp()`](https://perldoc.perl.org/functions/chomp) function to remove a
 newline from the end of a string. so our code will look like this:
 
     print "What is your name? ";
@@ -559,7 +572,7 @@ any errors and warnings. At the level we are covering in this tutorial,
 this won't be any different to sending them to `STDOUT`, but it's a good
 habit to get into for the future.
 
-You can print to `STDERR` using `print` or `say`. They both take an
+You can print to `STDERR` using `print()` or `say()`. They both take an
 optional first argument which is the filehandle to print to. It's a
 slightly strange first argument as there is no comma following it. So
 you could write something like this:
@@ -567,21 +580,22 @@ you could write something like this:
     # Note: No comma
     print STDERR "Something went wrong\n";
 
-But Perl has a shortcut function called `warn` that you can use instead.
+But Perl has a shortcut function called [`warn()`](https://perldoc.perl.org/functions/warn) that you can use instead.
 
     warn "Something went wrong\n";
 
-#Operators and Functions
+Operators and Functions
+=======================
 
 Perl has a vast array of operators and functions that allow you to
 manipulate your data in various ways. In a short tutorial like this we
 can't hope to cover all of them, but we can explain some of the most
 common ones.
 
-##Arithmetic Operators
+Arithmetic Operators
+--------------------
 
-Perl has operators for all of the standard arithmetic operators -
-addition, subtraction, multiplication and division.
+Perl has operators for all of the standard arithmetic operators—addition, subtraction, multiplication and division.
 
     my $addition       = 9 + 5; # 14
     my $subtraction    = 9 - 5; #  4
@@ -611,7 +625,8 @@ subtraction operators if you are adding or subtracting 1. You can use
 `$variable++` to increase the value by 1 and `$variable--` to decrease it
 by 1.
 
-##Other Operators
+Other Operators
+---------------
 
 You can concatenate two strings together with the `.` operator.
 
@@ -625,7 +640,7 @@ There is a shortcut assignment version.
 
     my $page .= $line; # Same as $page = $page . $line
 
-There is also a string repetition operator - `x`. It repeats its left-hand
+There is also a string repetition operator—`x`. It repeats its left-hand
 operand the number of times given by its right-hand operand.
 
     say 'hello' x 3; # prints 'hellohellohello'
@@ -641,13 +656,15 @@ in parentheses) then `x` becomes a list repetition operator.
     my @numbers = (1, 2, 3) x 3;
     say @numbers; # prints 123123123
 
-#Branching and Looping
+Branching and Looping
+=====================
 
 Code gets a lot more useful when you can take different routes through
 it. Before we can talk in detail about decision points, we need to get a
 grounding in basic logic.
 
-##True and False
+True and False
+--------------
 
 Many programming languages have explicit "true" and "false" values. Perl
 doesn't take that approach. Instead, in Perl, any expression can be
@@ -656,23 +673,24 @@ true or false. To do this, Perl declares that a small number of values
 are false. All other values are assumed to be true. The false values
 are:
 
-* The number 0 (and 0.0)
-* The string "0"
+* The number `0` (and `0.0`)
+* The string `"0"`
 * The empty string
-* The empty list, ()
+* The empty list, `()`
 * The undefined value
 
 Any other value is true. With that in mind we can examine some
 expressions and decide whether they are true or false.
 
-* 0 : false (it's on the list)
-* 1 : true (it's not on the list and is therefore true)
-* "0.0" : true (it's not on the list and is therefore true. Note that
+* `0`: false (it's on the list)
+* `1`: true (it's not on the list and is therefore true)
+* `"0.0"`: true (it's not on the list and is therefore true. Note that
 "0.0" is not "0")
-* "false" : true (it's not one of the list of false values)
-* (3 \* 2) - 6 : false (it evaluates to 0, which is on the list
+* `"false"`: true (it's not one of the list of false values)
+* `(3 * 2) - 6`: false (it evaluates to 0, which is on the list)
 
-##If, else and while
+If, else and while
+------------------
 
 Now that we understand how we can work out if a value is true or false,
 we can start to take different actions. We do this using the `if … else …`
@@ -697,10 +715,9 @@ the expression is true, Perl executes the code in the first block. It
 prints "Have another try" and decreases the value in `$lives_left` by
 one. A couple of failed attempts later, we will run this code when
 `$lives_left` has the value 0. That's one of the false values, so the `if`
-expression is false and it's the second block of code that gets run -
-the block that ends the program.
+expression is false and it's the second block of code that gets run—the block that ends the program.
 
-This code actually reads a lot like English - "if this expression is
+This code actually reads a lot like English—"if this expression is
 true then do this, otherwise do that".
 
 Sometimes you don't need the `else` part of the code. That's fine, you
@@ -752,7 +769,8 @@ block is executed. But with a `while` loop, the `while` expression is
 checked again and if it is still true then the block is executed again.
 This continues until the expression is false.
 
-##Comparison Operators
+Comparison Operators
+--------------------
 
 Another common requirement is to compare two values to see if they are
 equal or not. Perl has a set of operators for doing this. In fact it has
@@ -767,9 +785,9 @@ you turn on the heating. It would look like this:
     }
 
 Here we're using the `<` operator which you probably remember from
-maths lessons. If `$current\_temp` is less than the value in `$too\_cold`
+maths lessons. If `$current_temp` is less than the value in `$too_cold`
 then the expression is true and the if block is executed. There's a
-greater than comparison too - the easy way to remember which is which is
+greater than comparison too—the easy way to remember which is which is
 that the arrow points towards the smaller value. If our heating system
 also has built-in air conditioning, then we can use a greater than test
 to turn that on if the temperature gets too high.
@@ -794,9 +812,9 @@ programmer to tell it how values need to be compared.
 As an example, say you wanted to compare two variables and those two
 variables contained the values "0" and "0.0". Are those values the same?
 The answer is "it depends". If you compare the values as numbers, then
-they are the same (0 and 0.0 are clearly the same number - given that
+they are the same (0 and 0.0 are clearly the same number—given that
 Perl doesn't see a difference between integers and real numbers). But if
-you treat them as strings, then they are different - they have different
+you treat them as strings, then they are different—they have different
 lengths, for example. Perl can't know which type of comparison, so you
 need to tell it.
 
@@ -817,12 +835,13 @@ in the character set before the lower case ones do, so "Banana" is less
 than "apple".
 
 At some point in your Perl programming career, you will use the wrong
-comparison operators. This is a good reason to add "use warnings" to
+comparison operators. This is a good reason to add `use warnings` to
 your code. If you try to compare strings that don't look like numbers
 using the numeric comparison operators, then Perl will give you a
 warning.
 
-##Combining Logical Expressions
+Combining Logical Expressions
+-----------------------------
 
 Sometimes, driving our logic from the result of one expression isn't
 enough and we will need to combine two or more expression in order to
@@ -871,30 +890,32 @@ is true, then Perl needs to evaluate `B` to calculate the final result.
 But if `A` is false, then it doesn't matter what `B` is. The result already
 has to be false. Therefore Perl doesn't bother to evaluate `B`. Similarly,
 if the expression is `A or B` and `A` is true, then there is no reason to
-evaluate `B` - as the combined expression must be true.
+evaluate `B`—as the combined expression must be true.
 
 A huge amount of programming is about getting these combinations of
 logical expressions right, so it's worth checking carefully whenever you
 write one.
 
-#Built-In Functions
+Built-In Functions
+==================
 
 Perl has a number of built-in functions that you can use in your
-programs. We have already seen examples like `print`, `say` and `chomp`.
+programs. We have already seen examples like [`print()`](https://perldoc.perl.org/functions/print), [`say()`](https://perldoc.perl.org/functions/say) and [`chomp()`](https://perldoc.perl.org/functions/chomp).
 There are dozens of them and in this section we can only cover a few.
-You can find the full list by reading the "perlfunc" manual page.
+You can find the full list by reading the `perlfunc` manual page.
 
-##Numeric Functions
+Numeric Functions
+-----------------
 
 Perl has many of the numeric functions that you will remember from
-school. For example, there is a `sqrt` function that returns the square
+school. For example, there is a [`sqrt()`](https://perldoc.perl.org/functions/sqrt) function that returns the square
 root of a number.
 
     say sqrt 25; # Displays 5
     say sqrt 2;  # Displays 1.4142135623731
 
-There is an `abs` function which gives the absolute value of an
-expression. That means that if the expression is negative, then `abs`
+There is an [`abs()`](https://perldoc.perl.org/functions/abs) function which gives the absolute value of an
+expression. That means that if the expression is negative, then `abs()`
 will drop the minus sign before returning the value to you. This is
 useful, for example, if you want to find the difference between two
 values and you don't know which is the largest.
@@ -902,7 +923,7 @@ values and you don't know which is the largest.
     my $difference = abs $value -
                          $another_value;
 
-It is often useful to generate a random number and Perl has the `rand`
+It is often useful to generate a random number and Perl has the [`rand()`](https://perldoc.perl.org/functions/rand)
 function for this. With no arguments, it returns a random floating point
 number that is between 0 and 1 (actually, just less than 1).
 
@@ -914,15 +935,15 @@ could use this:
 
     my $died = rand > 0.5;
 
-The variable `$died` will be set to a true value if `rand` gives you a
-number greater than 0.5 - which it will do 50% of the time.
+The variable `$died` will be set to a true value if `rand()` gives you a
+number greater than 0.5—which it will do 50% of the time.
 
-You can also pass a number to `rand`, and you will then get a random
+You can also pass a number to `rand()`, and you will then get a random
 number between 0 and just less than the number you passed in.
 
     print rand 20; # I got 6.85922801176282
 
-You can use this together with `int` (which truncates floating point
+You can use this together with [`int()`](https://perldoc.perl.org/functions/int) (which truncates floating point
 numbers to integers) to simulate dice.
 
     say int(rand 6) + 1;
@@ -931,20 +952,21 @@ Calling `rand 6` gives a floating point number between 0 and just under
 6. Truncating that to an integer gives a number between 0 and 5. Adding
 one to that gives a dice throw.
 
-##String Functions
+String Functions
+----------------
 
 The next set of functions we will look at work on strings. The simplest
-is probably `length` which gives you the length of the string.
+is probably [`length()`](https://perldoc.perl.org/functions/length) which gives you the length of the string.
 
     say length 'This is a string'; # Displays 16
 
-You change the case a string with `uc` (convert to upper case) and `lc`
+You change the case a string with [`uc()`](https://perldoc.perl.org/functions/uc) (convert to upper case) and [`lc()`](https://perldoc.perl.org/functions/lc)
 (convert to lower case).
 
-    say ul 'This is a string'; # THIS IS A STRING
+    say uc 'This is a string'; # THIS IS A STRING
     say lc 'This is a string'; # this is a string
 
-You can extract sections of a string using `substr`. You pass this
+You can extract sections of a string using [`substr()`](https://perldoc.perl.org/functions/substr). You pass this
 function a string, a place to start and the length of the substring that
 you want. Note that the start of the string is position 0 (this is
 similar to arrays).
@@ -959,17 +981,17 @@ the end of the original string.
 
     say substr 'This is a string', 10; # string
 
-Two particularly functions are `split` (which turns strings into lists
-of values) and `join` (which does the reverse). Imagine that you have a
+Two particularly functions are [`split()`](https://perldoc.perl.org/functions/split) (which turns strings into lists
+of values) and [`join()`](https://perldoc.perl.org/functions/join) (which does the reverse). Imagine that you have a
 date in YYYY-MM-DD format and you want to split it into its constituent
 parts.
 
     my ($year, $month, $day)
       = split /-/, '2015-08-01';
 
-The first argument to `split` defines the characters that you want to
+The first argument to `split()` defines the characters that you want to
 split on. It is actually a regular expression. Later on, we will see
-that this makes `split` rather powerful.
+that this makes `split()` rather powerful.
 
 Sometimes you won't know how many data items there are in the string
 that you are splitting. In that case you could store the resulting list
@@ -978,32 +1000,33 @@ in an array
     my @values = split /\t/,
       $tab_separated_data;
 
-Where `split` takes a string and converts it into a list of values,
-`join` does the opposite.
+Where `split()` takes a string and converts it into a list of values,
+`join()` does the opposite.
 
     my $date = join '-',
       $year, $month, $day;
     my $tab_separated_data
       = join "\t", @values;
 
-##Array Functions
+Array Functions
+---------------
 
 There are a number of functions that allow you to manipulate arrays.
 
-To add data to the end of an array, use `push`
+To add data to the end of an array, use [`push()`](https://perldoc.perl.org/functions/push)
 
     my @words = ('this', 'is', 'an', 'array');
     push @words, 'with', 'more', 'words';
     say "@words";
 
 To get the last element from an array (and remove it from the array),
-use `pop`;
+use [`pop()`](https://perldoc.perl.org/functions/pop);
 
     my $word = pop @words;
     say $word;    # "words"
     say "@words"; # "words" is now missing
 
-We also have `shift` and `unshift` which do the same as `pop` and `push`,
+We also have [`shift()`](https://perldoc.perl.org/functions/shift) and [`unshift()`](https://perldoc.perl.org/functions/unshift) which do the same as `pop()` and `push()`,
 but work on the start of the array rather than the end.
 
     my @words = ('an', 'array', 'of', 'words');
@@ -1012,11 +1035,12 @@ but work on the start of the array rather than the end.
     my $word = shift @words; # "add"
     say "@words";            # "add" is missing
 
-##File Functions
+File Functions
+--------------
 
 We've talked about simple input and output, but there's a lot more to
 deal with when you're reading data from files. To read from or write to
-a file, you need to create a file handle. You do this using the `open`
+a file, you need to create a file handle. You do this using the [`open()`](https://perldoc.perl.org/functions/open)
 function.
 
     open my $file_handle, '<',
@@ -1026,7 +1050,7 @@ This creates a file handle (in a variable called `$file_handle`) that
 you can use to read from the file. The `<` means that we have opened
 the file in read mode. We can read from the file, but not write to it.
 
-The `open` function returns a true or false value which indicates
+The `open()` function returns a true or false value which indicates
 whether the file was opened successfully. If the open wasn't successful,
 there is no point in trying to read anything from the file, so you will
 very often see code like this:
@@ -1036,15 +1060,15 @@ very often see code like this:
 
 We're making good use of the laziness of Perl's logical operator's
 laziness that we discussed earlier. We have two expressions combined
-with an `or`. If the first expression (the call to `open`) is true (i.e.
+with an `or`. If the first expression (the call to `open()`) is true (i.e.
 the file was opened successfully) then the whole expressions must be
 true and there is no need for Perl to evaluate the second expression.
 But if the first expression is false (i.e. the open operation failed)
 then Perl needs to evaluate the second expression to find out the value
-of the combined expression. Evaluating the second expression calls `die`
+of the combined expression. Evaluating the second expression calls [`die()`](https://perldoc.perl.org/functions/die)
 which kills the program with an error message. The `$!` in the error
 message is a special internal Perl variable which will contain an
-explanation of why the file could not be opened - so it will say
+explanation of why the file could not be opened—so it will say
 something like "file not found". This `open … or die …` construct is
 incredibly common in Perl programs. You will see it in most Perl code
 that you look at.
@@ -1058,7 +1082,7 @@ This works exactly the same way as when we were reading from `STDIN` (as
 you would expect, as `STDIN` is just a file handle that the operating
 system has already opened for us). Importantly, the data that ends
 up in `$data` will have the newline character on the end and we can use
-`chomp` to remove it.
+`chomp()` to remove it.
 
 It is very common to read every line from a file in turn using a while
 loop.
@@ -1069,25 +1093,25 @@ loop.
     }
 
 Each time round this loop, Perl reads a line from the file handle and
-puts it into a special Perl variable called `$_`. `$_ `is known as the
+puts it into a special Perl variable called `$_`. `$_` is known as the
 "default variable" and often Perl functions and operators will work on
 `$_` if no other argument is given. We see an example of this here, as
-`chomp` is called with no argument. It will therefore work on `$_` and
+`chomp()` is called with no argument. It will therefore work on `$_` and
 remove the newline from that variable.
 
 Experienced Perl programmers make heavy use of `$_`. If you read a piece
 of Perl code and it seems to be missing a variable, then it's probably
-using `$_`. Most uses of `$_` are invisible - like the `chomp` example
+using `$_`. Most uses of `$_` are invisible—like the `chomp()` example
 above.
 
 Eventually you will have read every line from your file. At that point,
-the next time that the while loop expression is checked, the `< ... >`;
-will return "undef". That is, of course, a false value and the while
+the next time that the while loop expression is checked, the `< ... >`
+will return `undef`. That is, of course, a false value and the while
 loop will end.
 
 As well as reading from files, you will also want to write to files. You
 still do this using a file handle, but you need to open the file in
-write mode. This is done using the same `open` command, but we reverse
+write mode. This is done using the same `open()` command, but we reverse
 the direction of the second operator to indicate that we are writing
 rather than reading.
 
@@ -1096,7 +1120,7 @@ rather than reading.
       'name_of_your_file'
       or die "Could not open file: $!";
 
-We write to the file handle using `print` (or `say`), which has an
+We write to the file handle using `print()` (or `say()`), which has an
 optional first argument telling it which file handle to print to
 
     print $file_handle $some_data;
@@ -1117,11 +1141,12 @@ of the file rather than overwriting it.
       or die "Could not open file: $!";
     print $file_handle $some_data;
 
-You can use `close` to close a previously opened file handle.
+You can use [`close()`](https://perldoc.perl.org/functions/close) to close a previously opened file handle.
 
     close $file_handle;
 
-#Subroutines
+Subroutines
+===========
 
 A subroutine is a self-contained chunk of code which can be called from
 anywhere within your program. In Perl, a subroutine is defined using the
@@ -1137,7 +1162,7 @@ of parentheses.
     do_something_useful();
 
 The parentheses often aren't necessary, but they are useful to make sure
-the compiler knows you are calling a subroutine - so I like to include
+the compiler knows you are calling a subroutine—so I like to include
 them. You will sometimes see subroutines called using an ampersand:
 
     &do_something_useful;
@@ -1168,13 +1193,12 @@ We can now call the subroutine like this:
 
     say_hello('Dave'); # "Hello Dave"
 
-We're using `$_[0]` to get the first element of the array called `@_`
-- remember that we change the symbol from `@` to `$` when accessing
+We're using `$_[0]` to get the first element of the array called `@_`—remember that we change the symbol from `@` to `$` when accessing
 individual elements of an array. Notice, also that we have changed the
 single quotes to double quotes so the variable gets expanded.
 
-Accessing the `@_` array like this isn't really a good idea - for one
-thing it can lead to slightly strange-looking code - so more often you
+Accessing the `@_` array like this isn't really a good idea—for one
+thing it can lead to slightly strange-looking code—so more often you
 will see people copying parameters out of the `@_` array on the first
 line of a subroutine.
 
@@ -1185,7 +1209,7 @@ line of a subroutine.
 
 There's an important subtlety to notice here. Remember how you can get
 the length of an array by assigning it to a scalar variable. That means
-we can't just use `my $name = @_` to get the first parameter - that
+we can't just use `my $name = @_` to get the first parameter—that
 would just give us the number of parameters (do you see why?) Instead,
 we can put parentheses around the variable name to make it into a list
 assignment where the first (and only) element in `@_` is copied into
@@ -1227,13 +1251,13 @@ And it will display:
 The list of values that you pass in can be as long as you like.
 
 It is often useful to return values from subroutines. Perl has the
-`return` function for doing this. In our game, suppose we want to write
+[`return()`](https://perldoc.perl.org/functions/return) function for doing this. In our game, suppose we want to write
 a subroutine that works out if a player has died at a particular point.
-We can use `rand` in a subroutine like this:
+We can use [`rand()`](https://perldoc.perl.org/functions/rand) in a subroutine like this:
 
     sub has_died {
       my ($name) = @_;
-      if (rand > 0,5) {
+      if (rand > 0.5) {
         say "$name has died";
         return 1;
       } else {
@@ -1242,11 +1266,11 @@ We can use `rand` in a subroutine like this:
     }
 
 There isn't much here that we haven't already seen. We call the
-subroutine, passing in the name of a player and use `rand` to give that
+subroutine, passing in the name of a player and use `rand()` to give that
 player a 50% chance of dying. If the player has died we display that
 information and return a true value (here, a 1). If the player hasn't
-died we just call `return` without passing it a value. That's because if
-you don't give `return` a value, it will return a false value.
+died we just call `return()` without passing it a value. That's because if
+you don't give `return()` a value, it will return a false value.
 
 We can now call this function like this:
 
@@ -1275,7 +1299,8 @@ This subroutine expects to be passed a list of players names and gives
 each of those players a 50% chance of dying. It then returns a list of
 the players that have died. Can you follow how it does that?
 
-#Regular Expressions
+Regular Expressions
+===================
 
 The final major Perl feature that we will look at is regular expressions
 ("regexes" for short). Perl has a reputation for being a powerful
@@ -1301,7 +1326,7 @@ common to use it in an `if` statement as we have here.
 
 The regex itself is the bit between the slashes in `m/.../`. In this
 example it is the string "some text". That's a rather simple example as
-all of the characters match themselves - so this means "does `$string`
+all of the characters match themselves—so this means "does `$string`
 contain the string of characters 'some text'". Note that this is
 different to the `eq` operator which checks that to strings are
 identical. Here we are checking that one string is contained within the
@@ -1343,7 +1368,7 @@ occurrence of the character, a `*` means zero or more occurrences and a
 
     /colou?r/  # matches both "color"
                # and "colour"
-    /colou\*r/ # matches "color", "colour",
+    /colou*r/ # matches "color", "colour",
                # "colouur", "colouuur", etc
     /colou+r/  # matchs "colour", "colouur",
                # etc, but not "color"
@@ -1355,17 +1380,16 @@ will match a question mark.
 The next set of metacharacters match predefined groups of characters.
 You can use `\d` to match any digit, `\s` to match any whitespace
 character or `\w` to match any word character (by which, Perl means any
-of the characters that you can use in the name of a subroutine -
-letters, numbers and the underscore). These sequences all have their
+of the characters that you can use in the name of a subroutine—letters, numbers and the underscore). These sequences all have their
 inverse, so `\D` matches any non-digit, `\S` matches a non-whitespace
 character and `\W` matches a non-word character. A dot can be used to
 match any character (except a newline).
 
-    /\\d+/        # matches one or more
+    /\d+/        # matches one or more
                   # digits
-    /\\d+\\.\\d+/ # matches a floating
+    /\d+\.\d+/ # matches a floating
                   # point number
-    /\\w+\\s\\w+/ # matches two words
+    /\w+\s\w+/ # matches two words
                   # separated by whitespace
 
 You can create your own set of characters (called a "character class")
@@ -1389,7 +1413,8 @@ a string use `^` and to match the end of the string use `$`.
     /Some text$/ # Matches "Some text" at
                  # the end of your string
 
-#More Information
+More Information
+================
 
 We have covered a lot in this introduction, but there's a lot of material
 that we haven't had the space to cover. Here are some suggestions for
@@ -1397,22 +1422,24 @@ other topics to investigate long with the perldoc manual pages that you
 can read to get more information.
 
 * We only touched on a few of Perl's build-in functions and operators.
-The "perlfunc" and "perlop" manual pages give you the full lists.
+The `perlfunc` and `perlop` manual pages give you the full lists.
 * We mentioned a couple of Perl's special variables, but there are
-dozens more. The "perlvar" manual page has all of them.
+dozens more. The `perlvar` manual page has all of them.
 * Regular expressions do a lot more than we talked about. There's a
-good tutorial in "perlretut" and a full reference manual in "perlre".
+good tutorial in `perlretut` and a full reference manual in `perlre`.
 * Perl comes with a lot of useful add-on modules which can be used in
-your program. They are all listed in "perlmodlib".
+your program. They are all listed in `perlmodlib`.
 
 I hope that this brief introduction has whetted your appetite and
 started to show you what a powerful and flexible language Perl is.
 There's a lot more to learn so please look for a good course or book to
 take your Perl programming to the next level.
 
-#About Stuff
+About Stuff {.unnumbered}
+=========================
 
-##About this Book
+About this Book
+---------------
 
 This book was written in Markdown which was then converted to EPUB
 format using Pandoc. For Amazon, the EPUB was then converted to MOBI
@@ -1421,7 +1448,8 @@ using KindleGen.
 The source to the book is available on Github. See
 [https://github.com/davorg/perl-taster](https://github.com/davorg/perl-taster).
 
-##About Perl School
+About Perl School
+-----------------
 
 Perl School was an idea that Dave Cross had in 2012. He thought that more
 people would attend Perl training courses if they were a) cheaper and
@@ -1431,7 +1459,8 @@ the idea (along with the brand) was quietly dropped.
 The brand has now been resurrected as a series of brief books about
 various Perl topics.
 
-##About the Author
+About the Author
+----------------
 
 Dave Cross has been a professional programmer since 1988 and has been
 using Perl since 1996. In 1998 he started the London Perl Mongers, the

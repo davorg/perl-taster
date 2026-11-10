@@ -1,2 +1,5 @@
 *.epub
 *.mobi
+*.pdf
+*.epub
+build/
