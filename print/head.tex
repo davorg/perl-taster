@@ -1,0 +1,45 @@
+
+\setmainfont{EB Garamond}[Numbers=Lining]
+\setsansfont{Montserrat}[UprightFont=*-Regular,BoldFont=*-SemiBold,ItalicFont=*-Italic]
+\setmonofont{DejaVu Sans Mono}[Scale=0.9]
+\linespread{1.092}
+\usepackage{emptypage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[LE]{\sffamily\footnotesize Perl Taster}
+\fancyhead[RO]{\sffamily\footnotesize\nouppercase{\leftmark}}
+\fancyfoot[LE,RO]{\sffamily\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[LE,RO]{\sffamily\footnotesize\thepage}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{}
+\usepackage{fvextra}
+\fvset{breaklines,breakanywhere=false,fontsize=\fontsize{7.8pt}{10pt}\selectfont,xleftmargin=1em}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{}
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\sffamily\bfseries\huge}{\sffamily\mdseries\small\MakeUppercase{\chaptertitlename}\ \thechapter}{1ex}{}
+\titlespacing*{\chapter}{0pt}{0pt}{2.5em}
+\titleformat{\section}{\sffamily\bfseries\large}{}{0pt}{}
+\titleformat{\subsection}{\sffamily\bfseries\normalsize}{}{0pt}{}
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{1}
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchapfont}{\sffamily\small\bfseries}
+\renewcommand{\cftchappagefont}{\sffamily\small\bfseries}
+\renewcommand{\cftsecfont}{\small}
+\renewcommand{\cftsecpagefont}{\small}
+\renewcommand{\cfttoctitlefont}{\sffamily\bfseries\huge}
+\renewcommand{\cftaftertoctitle}{\thispagestyle{plain}}
+\setlength{\cftbeforechapskip}{0.6em}
+\usepackage{imakeidx}
+\makeindex[intoc,columns=2,title=Index]
+\indexsetup{othercode=\small}
+\usepackage[bottom,hang]{footmisc}
+\renewcommand{\footnotelayout}{\small\raggedright}
+\raggedbottom
+\AtBeginDocument{\hypersetup{hidelinks}}
+\usepackage{graphicx}
+\usepackage{xurl}
+\setlength{\emergencystretch}{3em}
+\frenchspacing
