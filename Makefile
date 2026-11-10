@@ -10,7 +10,7 @@ BUILD = build
 GEOM  = paperwidth=6in,paperheight=9in,inner=24mm,outer=18mm,top=20mm,bottom=22mm,headsep=6mm,footskip=11mm
 XELATEX = cd $(BUILD) && TEXINPUTS=..: xelatex -interaction=nonstopmode -halt-on-error $(BOOK)-kdp.tex >/dev/null
 
-.PHONY: all epub kdp clean
+.PHONY: all epub kdp cover guides clean
 
 all: epub kdp
 
@@ -39,4 +39,15 @@ $(BOOK)-kdp.pdf: $(BOOK).md print/*
 	cp $(BUILD)/$(BOOK)-kdp.pdf $@
 
 clean:
-	rm -rf $(BUILD) $(BOOK).epub $(BOOK)-kdp.pdf
+	rm -rf $(BUILD) $(BOOK).epub $(BOOK)-kdp.pdf $(BOOK)-cover.pdf $(BOOK)-cover.png
+
+# One-piece paperback cover (front, spine, back) for KDP. PAGES must match
+# the interior page count that KDP reports (it rounds odd counts up).
+PAGES = 54
+cover: $(BOOK)-cover.pdf
+
+$(BOOK)-cover.pdf: cover/make_cover.py cover.jpg pearl-2045162_1920.jpg
+	python3 cover/make_cover.py $(PAGES) $(BOOK)-cover
+
+guides: cover/make_cover.py
+	python3 cover/make_cover.py $(PAGES) $(BUILD)/cover-guides --guides
