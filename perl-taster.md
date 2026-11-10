@@ -1,6 +1,7 @@
 ---
 title: Perl Taster
 subtitle: Your First Two Hours with Perl
+edition: Second Edition
 author: Dave Cross
 language: en-GB
 cover-image: cover.jpg
@@ -33,30 +34,36 @@ Getting Started
 ===============
 
 To write and run Perl programs, you need two things—a Perl compiler
-and an editor. If you’re using a Mac or a machine running Linux, then
-Perl will already be installed on your system.
+and an editor. This book uses features that were added in Perl 5.36,
+which was released in 2022, so you will need that version or a later
+one.
 
-However, if you’re using Windows then you’ll need to install Perl. There
-are a few versions of Perl available for Windows. The one that most
-people seem to recommend is Strawberry Perl which you can get from
+If you're using Linux, then Perl will almost certainly already be
+installed on your system, and any reasonably recent distribution will
+have a new enough version. Macs also come with Perl, but at the time of
+writing Apple ships Perl 5.34, which is too old for the code in this
+book. The easiest way to get a newer version is to install
+[Homebrew](https://brew.sh/) and then run `brew install perl`.
+
+If you're using Windows then you'll need to install Perl. The version
+that most people recommend is Strawberry Perl, which you can get from
 [https://strawberryperl.com/](https://strawberryperl.com/). It is
-distributed as a standard Windows software installation file (an .msi
-file) so you will be able to install it easily.
+distributed as a standard Windows installation file (an .msi file) so
+you will be able to install it easily.
 
 Once you have Perl installed, it is simple to check that it is working
-correctly. Just bring up a terminal window (in Windows that’s CMD.EXE)
-and run `perl -v` to see which version of Perl is installed. Hopefully
-it will be something pretty recent (say, 5.14 or newer) but don’t worry
-if it’s older than that—all of the code we’ll be writing this tutorial
-will run on versions as old as 5.10.
+correctly. Just open a terminal window (on Windows, that's the Command
+Prompt or PowerShell) and run `perl -v` to see which version of Perl is
+installed. You're looking for something like "This is perl 5, version
+36" or a higher version number.
 
 You will also need an editor to write your Perl programs. Any basic text
-editor will do, but as you get more proficient at programming you’ll
-find a proper programmers editor will be very useful. Many Perl
-programmers use something like vi or Emacs. These editors both have
+editor will do, but as you get more proficient at programming you'll
+find that a proper programmer's editor is very useful. Many Perl
+programmers use something like Vim or Emacs. These editors both have
 quite steep learning curves, so you might feel more comfortable starting
-with something like Atom, which you can download from
-[https://atom.io](https://atom.io/).
+with something like Visual Studio Code, which you can download from
+[https://code.visualstudio.com/](https://code.visualstudio.com/).
 
 Your First Perl Program
 =======================
@@ -65,17 +72,34 @@ It’s traditional that your first program in any language should print
 the words “Hello world”. So that’s what we will do. Open your editor and
 type in the following:
 
+    #!/usr/bin/perl
+
+    use v5.36;
+
     print "Hello world\n";
 
 Save the file as `hello.pl` and run it by typing `perl hello.pl` on your
 command line. You should see the text “Hello world”. If it doesn’t work,
 then the most likely problem is that you aren’t running the command from
 the directory where you saved the program. Find the directory where the
-hello.pl file is and try running the command from there.
+`hello.pl` file is and try running the command from there.
 
-There’s not much to explain here. We have a single line of code and it
-calls a built-in Perl function called [`print()`](https://perldoc.perl.org/functions/print). You can probably guess
-what print does—it takes a string and displays that string on the
+There’s not much to explain here. The first line is called the "shebang"
+line. On Linux and macOS it tells the operating system which program
+should run this file, and Perl itself looks at it for options. You'll
+see it at the top of most Perl programs.
+
+The `use v5.36` line tells Perl that this program is written for Perl
+version 5.36 or later. Perl takes backwards compatibility very
+seriously, so many of the features added in recent years have to be
+turned on before you can use them. Asking for a version like this turns
+on all of the features that were current in that version, along with
+some useful safety checks that we'll look at in a later chapter. Every
+complete program in this book starts with this line.
+
+The last line is where the work happens. It calls a built-in Perl
+function called [`print()`](https://perldoc.perl.org/functions/print). You can probably guess
+what `print()` does—it takes a string and displays that string on the
 screen. In this case, we pass it the string “Hello world\n” and that is
 what we see on our screen. If you have used pretty much any other modern
 programming language you will recognise the final two characters in that
@@ -89,24 +113,21 @@ works, but Perl programmers tend to omit non-essential punctuation.
 
 There is another way to write the same program. In fact there are many
 other ways (one of Perl’s mottos is “There’s more than one way to do
-it”) but we will only cover one more here. Try putting the the following
-in a file called hello2.pl and running it:
+it”) but we will only cover one more here. Try putting the following
+in a file called `hello2.pl` and running it:
 
-    use feature 'say';
+    #!/usr/bin/perl
+
+    use v5.36;
+
     say 'Hello world';
 
-If your version of Perl is 5.10 or greater, then this code will do the
-same as the previous version (if you have an earlier version you will
-get a syntax error and you should really think about updating your
-version of Perl).
-
-The new function [`say()`](https://perldoc.perl.org/functions/say) was added in Perl 5.10. It is a short-cut version
-of `print()` which always adds the newline to the string that it prints.
-It is a feature that needs to be turned on explicitly, which is why we
-have the `use feature` line before it. You will often see `use`
-statements in a Perl program (the same keyword is used to load external
-libraries) and it is traditional to put them all near the top of the
-file.
+The function [`say()`](https://perldoc.perl.org/functions/say) is a shortcut version
+of `print()` which always adds a newline to the end of what it prints.
+It is one of the features that `use v5.36` turns on for us. You will
+often see `use` statements near the top of a Perl program (the same
+keyword is used to load external libraries) and it is traditional to
+put them all there.
 
 Strings
 =======
@@ -176,7 +197,8 @@ Scalars
 
 Try the following code:
 
-    use feature 'say';
+    use v5.36;
+
     my $name = 'John';
     say "Hello $name";
 
@@ -192,14 +214,15 @@ it all in the same statement. You don’t have to do that. You can declare
 the variable on one line and give it a value later on. It would be just
 as valid to write this:
 
-    use feature 'say';
+    use v5.36;
+
     my $name;
     $name = 'John';
     say "Hello $name";
 
-From now on, I'll omit the `use feature` line. If you see example code
-that uses [`say()`](https://perldoc.perl.org/functions/say), please assume the `use feature` line is part of the
-code.
+From now on, I'll omit the `use v5.36` line (and the shebang line) from
+short examples. When you try them out, please assume that those lines
+are part of the code.
 
 This code also has an example of a variable being expanded in a
 double-quoted string. When the `say()` statement is executed, Perl looks
@@ -447,38 +470,43 @@ to know about [`print()`](https://perldoc.perl.org/functions/print).
 Safety Nets
 -----------
 
-If you look at any program written by an experienced Perl programmer,
-you will almost certainly see two lines somewhere near the top of the
-code.
+Perl has two "safety nets" that make it run extra checks on your code
+and tell you if it finds anything that doesn't look right. They are
+called `strict` and `warnings`. Taking notice of the problems they
+report and making the suggested fixes will almost certainly fix
+potential bugs in your code.
+
+If you have been following along, you're already using them. The
+`use v5.36` line at the top of our programs turns both of them on. In
+older Perl code you will see them turned on explicitly, with two lines
+near the top of the program:
 
     use strict;
     use warnings;
 
-These are Perl's "safety nets". When they are added to your code, Perl
-runs a few more checks each time you run your program and will tell you
-if it finds anything that doesn't look right. Taking notice of these
-warnings and making the suggested fixes will almost certainly fix
-potential bugs in your code. I highly recommend that you get into the
-habit of adding them to every Perl program that you write.
+You don't need those lines if your program starts with `use v5.36`, but
+it's useful to recognise them, as you'll see them in almost every Perl
+program written before 2022.
 
-The most important thing that `use strict` does is to force you to
-declare your variables. This is a good idea for several reasons, the
-most obvious of which is that it stops you from making typos in your
+The most important thing that `strict` does is to force you to declare
+your variables. This is a good idea for several reasons, the most
+obvious of which is that it stops you from making typos in your
 variable names. If Perl knows that you have declared all of your
-variables and then comes across an undeclared variable called `$varaible`
-then the compiler knows that something is wrong. It won't know that you
-meant the variable called `$variable` which you have declared, but,
-hopefully, if it shows you the error you can work out what has gone
-wrong. Most of the problems that `use strict` finds are treated as fatal
-errors, so Perl shows you the error and then kills the program.
+variables and then comes across an undeclared variable called
+`$varaible` then the compiler knows that something is wrong. It won't
+know that you meant the variable called `$variable` which you have
+declared, but, hopefully, if it shows you the error you can work out
+what has gone wrong. Most of the problems that `strict` finds are
+treated as fatal errors, so Perl shows you the error and then stops the
+program.
 
-When `use warnings` is added to your code, Perl goes on the lookout for
-a large number of unusual coding practices. Are you printing a variable
-that contains `undef`? Perl will warn you. Have you initialised a hash
-from a list with an odd number of elements? Perl will warn you. In all
-of these cases, Perl won't kill the program, it will display a warning
-to you and the program will continue. But you would be well-advised to
-take note of the problem and fix it.
+With `warnings` turned on, Perl goes on the lookout for a large number
+of unusual coding practices. Are you printing a variable that contains
+`undef`? Perl will warn you. Have you initialised a hash from a list
+with an odd number of elements? Perl will warn you. In all of these
+cases, Perl won't stop the program—it will display a warning and the
+program will continue. But you would be well-advised to take note of
+the problem and fix it.
 
 If you get a warning that you don't quite understand, then it can be
 useful to add `use diagnostics` to your program as well. This will
@@ -487,13 +515,13 @@ solutions. But don't leave that line in your code when it goes into
 production.
 
 All in all there are no good reasons not to use these safety nets.
-That's why most experienced Perl programmers use them all the time.
+That's why experienced Perl programmers use them all the time.
 
 Input and Output
 ================
 
-Any programs get more interesting when you can get data into and out of
-them. You before moving on to look at more operators and functions,
+Programs get more interesting when you can get data into and out of
+them. Before moving on to look at more operators and functions,
 let's take a quick aside to look at some simple I/O methods.
 
 When a program runs, your operating system will open three file handles
@@ -645,7 +673,7 @@ operand the number of times given by its right-hand operand.
 
     say 'hello' x 3; # prints 'hellohellohello'
 
-In over twenty years of writing Perl, I've never used that for anything
+In thirty years of writing Perl, I've never used that for anything
 other than creating separators in reports.
 
     say '-' x 80;
@@ -835,8 +863,8 @@ in the character set before the lower case ones do, so "Banana" is less
 than "apple".
 
 At some point in your Perl programming career, you will use the wrong
-comparison operators. This is a good reason to add `use warnings` to
-your code. If you try to compare strings that don't look like numbers
+comparison operators. This is one of the reasons that `warnings` are so
+useful. If you try to compare strings that don't look like numbers
 using the numeric comparison operators, then Perl will give you a
 warning.
 
@@ -1069,7 +1097,7 @@ of the combined expression. Evaluating the second expression calls [`die()`](htt
 which kills the program with an error message. The `$!` in the error
 message is a special internal Perl variable which will contain an
 explanation of why the file could not be opened—so it will say
-something like "file not found". This `open … or die …` construct is
+something like "No such file or directory". This `open … or die …` construct is
 incredibly common in Perl programs. You will see it in most Perl code
 that you look at.
 
@@ -1181,58 +1209,52 @@ You can call it like this:
     say_hello(); # "Hello"
 
 It would be nice if we could personalise this and say hello to specific
-people. For this we need to pass parameters into the function. The
-parameters to a Perl subroutine end up in a special array variable
-called `@_`, so we can rewrite the subroutine to work like this:
+people. For this we need to pass parameters into the subroutine. We do
+that by giving the subroutine a *signature*: a list of variables, in
+parentheses, between the subroutine's name and its block of code.
 
-    sub say_hello {
-      say "Hello $_[0]";
+    sub say_hello ($name) {
+      say "Hello $name";
     }
 
 We can now call the subroutine like this:
 
     say_hello('Dave'); # "Hello Dave"
 
-We're using `$_[0]` to get the first element of the array called `@_`—remember that we change the symbol from `@` to `$` when accessing
-individual elements of an array. Notice, also that we have changed the
-single quotes to double quotes so the variable gets expanded.
+When the subroutine is called, the value that we pass in is copied into
+the variable `$name`, which we can then use inside the subroutine just
+like any other variable. Notice that we have changed the single quotes
+to double quotes so the variable gets expanded.
 
-Accessing the `@_` array like this isn't really a good idea—for one
-thing it can lead to slightly strange-looking code—so more often you
-will see people copying parameters out of the `@_` array on the first
-line of a subroutine.
+Signatures are another of the features that `use v5.36` turns on for
+us. As well as making the code easier to read, they check that the
+subroutine has been called correctly. If you call `say_hello()` with no
+arguments, or with two, Perl will stop the program and tell you that
+you passed the wrong number of arguments.
 
-    sub say_hello {
-      my ($name) = @_;
-      say "Hello $name";
+A subroutine can, of course, take more than one parameter. Just list
+them all in the signature, separated by commas.
+
+    sub say_greeting ($greeting, $name) {
+      say "$greeting $name";
     }
 
-There's an important subtlety to notice here. Remember how you can get
-the length of an array by assigning it to a scalar variable. That means
-we can't just use `my $name = @_` to get the first parameter—that
-would just give us the number of parameters (do you see why?) Instead,
-we can put parentheses around the variable name to make it into a list
-assignment where the first (and only) element in `@_` is copied into
-`$name`.
+    say_greeting('Good morning', 'Dave');
 
-As the subroutine parameters are received in `@_`, it is easy to pass
-multiple parameters into a subroutine. And, unlike in many other
-programming languages, the subroutine doesn't need to know how many
-parameters to expect. We can rewrite our subroutine so that it says
-hello to many people.
+You can also make the last parameter an array. That array will collect
+all of the remaining arguments, however many there are. So we can
+rewrite our subroutine so that it says hello to as many people as we
+like.
 
-    sub say_hello {
-      my @names = @_;
+    sub say_hello (@names) {
       foreach my $name (@names) {
         say "Hello $name";
       }
     }
 
-We copy the input array into another @array called names (this isn't
-necessary, but it makes our code a little easier to follow. We then use
-a `foreach` loop to process each element of the array in turn. We
-haven't seen the `foreach` loop before, but it's a useful way to
-traverse a list. We define a new variable (here called `$name`) and
+Here, we use a `foreach` loop to process each element of the array in
+turn. We haven't seen the `foreach` loop before, but it's a useful way
+to traverse a list. We define a new variable (here called `$name`) and
 each element from the list in turn gets put into that variable. We then
 execute the attached block of code for each value in the list. So we can
 now call our subroutine like this:
@@ -1250,13 +1272,29 @@ And it will display:
 
 The list of values that you pass in can be as long as you like.
 
+Signatures were only added to Perl fairly recently, so you will see a
+lot of code that doesn't use them. In older code, the arguments to a
+subroutine are put into a special array called `@_`, and the first line
+of the subroutine usually copies them into variables:
+
+    sub say_hello {
+      my ($name) = @_;
+      say "Hello $name";
+    }
+
+Notice the parentheses around `$name`. Remember that if you assign an
+array to a scalar variable, you get the number of elements in the
+array. The parentheses turn this into a list assignment, so the first
+element of `@_` is copied into `$name`. You don't need to write code
+like this yourself, but you'll need to recognise it when you read other
+people's Perl.
+
 It is often useful to return values from subroutines. Perl has the
 [`return()`](https://perldoc.perl.org/functions/return) function for doing this. In our game, suppose we want to write
 a subroutine that works out if a player has died at a particular point.
-We can use [`rand()`](https://perldoc.perl.org/functions/rand) in a subroutine like this:
+We can use `rand()` in a subroutine like this:
 
-    sub has_died {
-      my ($name) = @_;
+    sub has_died ($name) {
       if (rand > 0.5) {
         say "$name has died";
         return 1;
@@ -1272,20 +1310,19 @@ information and return a true value (here, a 1). If the player hasn't
 died we just call `return()` without passing it a value. That's because if
 you don't give `return()` a value, it will return a false value.
 
-We can now call this function like this:
+We can now call this subroutine like this:
 
     if (has_died('Matt')) {
       $lives_left--;
     }
 
 And you can see how this will now tie in with the rest of the game code
-that we write earlier.
+that we wrote earlier.
 
 But Perl subroutines can return more than one value. You can return a
 list of values, which makes it possible to write subroutines like this:
 
-    sub has_died {
-      my @names = @_;
+    sub has_died (@names) {
       my @died;
       foreach my $name (@names) {
         if (rand > 0.5) {
@@ -1295,7 +1332,7 @@ list of values, which makes it possible to write subroutines like this:
       return @died;
     }
 
-This subroutine expects to be passed a list of players names and gives
+This subroutine expects to be passed a list of players' names and gives
 each of those players a 50% chance of dying. It then returns a list of
 the players that have died. Can you follow how it does that?
 
@@ -1418,17 +1455,23 @@ More Information
 
 We have covered a lot in this introduction, but there's a lot of material
 that we haven't had the space to cover. Here are some suggestions for
-other topics to investigate long with the perldoc manual pages that you
+other topics to investigate along with the perldoc manual pages that you
 can read to get more information.
 
-* We only touched on a few of Perl's build-in functions and operators.
+* `perlintro` is a short overview of the whole language. It's a good
+next step after this book.
+* We only touched on a few of Perl's built-in functions and operators.
 The `perlfunc` and `perlop` manual pages give you the full lists.
 * We mentioned a couple of Perl's special variables, but there are
 dozens more. The `perlvar` manual page has all of them.
 * Regular expressions do a lot more than we talked about. There's a
 good tutorial in `perlretut` and a full reference manual in `perlre`.
+* Subroutines (and their signatures) can do a lot more than we have
+covered. The details are in `perlsub`.
 * Perl comes with a lot of useful add-on modules which can be used in
-your program. They are all listed in `perlmodlib`.
+your program. They are all listed in `perlmodlib`. Thousands more are
+available from CPAN, the Comprehensive Perl Archive Network, which you
+can search at [https://metacpan.org/](https://metacpan.org/).
 
 I hope that this brief introduction has whetted your appetite and
 started to show you what a powerful and flexible language Perl is.
@@ -1441,11 +1484,14 @@ About Stuff {.unnumbered}
 About this Book
 ---------------
 
-This book was written in Markdown which was then converted to EPUB
-format using Pandoc. For Amazon, the EPUB was then converted to MOBI
-using KindleGen.
+This is the second edition of *Perl Taster*. The text and all of the
+examples have been updated for Perl 5.36, which means the code now uses
+`use v5.36` and subroutine signatures.
 
-The source to the book is available on Github. See
+The book is written in Markdown. The ebook is built from that source
+using pandoc, and the paperback using pandoc and XeLaTeX.
+
+The source to the book is available on GitHub. See
 [https://github.com/davorg/perl-taster](https://github.com/davorg/perl-taster).
 
 About Perl School
@@ -1456,8 +1502,8 @@ people would attend Perl training courses if they were a) cheaper and
 b) at the weekend. This worked for a while, but after six months or so,
 the idea (along with the brand) was quietly dropped.
 
-The brand has now been resurrected as a series of brief books about
-various Perl topics.
+The brand has since been resurrected as a publishing imprint for books
+about Perl. *Perl Taster* was its first book.
 
 About the Author
 ----------------
@@ -1470,7 +1516,7 @@ Dave is the author of *Data Munging with Perl* and a co-author of
 *Perl Template Toolkit*. He is a regular speaker at Perl conferences
 across Europe and often runs training courses alongside those conferences.
 
-He runs Magnum Solutions Ltd., a London-based Perl consultancy and would
+He runs Magnum Solutions Ltd., a London-based Perl consultancy and would be
 happy to write Perl code for your company or train your programmers to
 write better Perl code. See the
 [Magnum Solutions web site](https://mag-sol.com/) for details.
